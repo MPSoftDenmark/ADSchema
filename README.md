@@ -1,18 +1,50 @@
 # ADSchema
 A PowerShell Module that can be used to update the schema in Active Directory
 
-# Installation
+# Examples (In OS Prod.)
+Create "osMSLic" and "osWorkspace"
+ - to hold Workspace(enabled/disabled) and all Microsft365 licenses for user in OS domain
+
+## Installation
+`Copy source to server C:\Program Files\WindowsPowerShell\Modules\ADSchema`
 `Install-Module ADSchema`
-# Example
+
+## Create the Attribute/Classes
+```
+New-ADSchemaAttribute -Name osMSLic -Description 'OS Microsoft365 Licens(s)' -AttributeType String
+New-ADSchemaAttribute -Name osWorkspace -Description 'OS Do the user have a Workspace/VM' -AttributeType boolean
+
+New-ADSchemaClass asPerson -AdminDescription 'OS Person Class to host custom attributes' -Category Auxiliary
 
 ```
-New-ADSchemaAttribute -Name asFavColor -Description 'User Favorite Color' -AttributeType String
-New-ADSchemaClass asPerson -AdminDescription 'Person Class to host custom attributes' -Category Auxiliary
-Add-ADSchemaAttributeToClass -Attribute asFavColor -Class asPerson
-Add-ADSchemaAuxiliaryClassToClass -AuxiliaryClass asPerson -Class user
-set-aduser andy -add @{'asFavColor' = 'blue'}
-get-aduser andy -properties asFavColor
+## Add the Classes to AD
 ```
+Add-ADSchemaAttributeToClass -Attribute osMSLic -Class asPerson
+Add-ADSchemaAttributeToClass -Attribute osWorkspace -Class asPerson
+Add-ADSchemaAuxiliaryClassToClass -AuxiliaryClass asPerson -Class user
+```
+
+##Use classes on AD-User "ABC"
+```
+set-aduser "abc" -add @{'osMSLic' = 'reseller-account:O365_BUSINESS_PREMIUM'}
+set-aduser "abc" -add @{'osWorkspace' = 'TRUE'}
+```
+
+### or update the user "abc"
+```
+set-aduser "abc" -replace @{'osMSLic' = ''}
+set-aduser "abc" -replace @{'osWorkspace' = 'FALSE'}
+
+```
+
+Show the resualt
+```
+get-aduser "abc" -properties osMSLic, osWorkspace
+get-aduser "abc" -properties osWorkspace
+
+```
+
+
 # Overview
 The purpose of this module is to allow users to easily add attributes and classes to the schema of Active Directory. Editing the schema is often a daunting task and requires knowledge of several  details that most people do not think about on a regular basis. 
     
