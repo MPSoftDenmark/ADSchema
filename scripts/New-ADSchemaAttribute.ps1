@@ -33,7 +33,7 @@
 .PARAMETER AttributeID
   AttributeID is the Object Identifier (OID) for the new attribute. OIDs have a 
   specific syntax that looks something like '1.2.840.113556.1.8000.2554.13769.13577.20614'
-  You can use the New-ADSchemaTestOid to generate one. However, in production, you should
+  You can use the New-ADSchemaOID to generate one. However, in production, you should
   use your own OID based on your company's defined OID structure and your Private Enterprise
   Number. For more inforation, please look at help about_ADSchema. 
 
@@ -46,7 +46,7 @@
    attributeSyntax you want. 
 
 .EXAMPLE
-   $oid = New-ADSchemaTestOID
+   $oid = New-ADSchemaOID
    New-ADSchemaAttribute -Name as-favoriteColor -Description 'Favorite Color' -IsSingleValued $true -AttributeType String -AtributeID $oid
    
 .EXAMPLE
@@ -80,7 +80,7 @@ Function New-ADSchemaAttribute {
         [Parameter(ValueFromPipelinebyPropertyName,ParameterSetName = 'basic')]
         [Alias('OID')]
         [String]
-        $AttributeID = (New-ADSchemaTestOID),
+        $AttributeID = (New-ADSchemaOID),
 
         [Parameter(ValueFromPipelineByPropertyName,ParameterSetName = 'advanced')]
         [String]

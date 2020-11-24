@@ -24,7 +24,7 @@
   on other categories if you wish to overwrite.
 
 .EXAMPLE
-  $oid = New-ADSchemaTestOID
+  $oid = New-ADSchemaOID
   New-ADSchemaClass -Name asPerson -AdminDescription 'host custom user attributes' -Category Auxiliary -AttributeID $oid
 #>
 Function New-ADSchemaClass {
@@ -45,7 +45,7 @@ Function New-ADSchemaClass {
 
         [Parameter(ValueFromPipelinebyPropertyName)]
         [Alias('OID')]
-        $AttributeID = (New-ADSchemaTestOID)
+        $AttributeID = (New-ADSchemaOID)
     )
 
     BEGIN {}

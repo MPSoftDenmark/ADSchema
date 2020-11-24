@@ -8,22 +8,22 @@
     See help about_adschema for more information.
 
 .EXAMPLE
-    PS> New-ADSchemaTestOID
+    PS> New-ADSchemaOID
         1.2.840.113556.1.8000.2554.9398
 
 .EXAMPLE
-   PS> New-ADSchemaTestOID -Parts 5 -Prefix 1.2.3
+   PS> New-ADSchemaOID -Parts 5 -Prefix 1.2.3
        1.2.3.6317.60671.47166.17019.42042
 
 .EXAMPLE       
-   PS> New-ADSchemaTestOID -Parts 4 -Prefix 1.2.3
+   PS> New-ADSchemaOID -Parts 4 -Prefix 1.2.3
        1.2.3.7279.9696.19673.18618
 
 .EXAMPLE
-   PS> New-ADSchemaTestOID -Parts 6
+   PS> New-ADSchemaOID -Parts 6
        1.2.840.113556.1.8000.2554.59800.33270.113.17098.41534.37654
 #>
-Function New-ADSchemaTestOID {
+Function New-ADSchemaOID {
     param(
         [Parameter()]    
         $Prefix = "1.2.840.113556.1.8000.2554",
